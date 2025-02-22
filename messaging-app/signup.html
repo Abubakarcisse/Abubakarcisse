@@ -1,0 +1,33 @@
+`<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Chat - Signup</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Space Chat Signup</h2>
+        <input type="text" id="new-username" placeholder="Choose a username" />
+        <button onclick="signup()">Sign Up</button>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+    <script>
+        function signup() {
+            let newUsername = document.getElementById("new-username").value.trim();
+            if (newUsername) {
+                let users = JSON.parse(localStorage.getItem("users")) || [];
+                if (!users.includes(newUsername)) {
+                    users.push(newUsername);
+                    localStorage.setItem("users", JSON.stringify(users));
+                }
+                localStorage.setItem("loggedInUser", newUsername);
+                window.location.href = "login.html";
+            } else {
+                alert("Please enter a valid username.");
+            }
+        }
+    </script>
+</body>
+</html>
